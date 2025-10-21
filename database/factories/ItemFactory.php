@@ -22,6 +22,7 @@ class ItemFactory extends Factory
             'sku' => Str::upper(Str::random(10)),
             'price' => $this->faker->randomFloat(2, 5, 50),
             'status' => 'active',
+            'images' => $this->faker->imageUrl(400, 400, 'products', true, 'Item'),
         ];
     }
 }

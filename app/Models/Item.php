@@ -19,6 +19,10 @@ class Item extends Model
 
     ];
 
+    protected $casts = [
+    'images' => 'array',
+    ];   
+
         public function inventory()
     {
         return $this->hasOne(Inventory::class);

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 use Livewire\Component;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 
@@ -36,7 +37,12 @@ class ListItems extends Component implements HasActions, HasSchemas, HasTable
                 TextColumn::make('sku')->searchable()
                 ->sortable(),
                 TextColumn::make('price')->money('IDR')->sortable(),
-                TextColumn::make('status')->badge()->searchable()
+                TextColumn::make('status')->badge()->searchable(),
+                ImageColumn::make('images')
+                    ->label('Image')
+                    ->getStateUsing(fn ($record) => $record->images ? $record->images[0] : null)
+                    ->circular(),
+
             ])
             ->filters([
                 //

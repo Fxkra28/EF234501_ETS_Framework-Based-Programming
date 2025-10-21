@@ -3,6 +3,7 @@
 use App\Livewire\Customer\CreateCustomers;
 use App\Livewire\Customer\EditCustomers;
 use App\Livewire\Customer\ListCustomers;
+use App\Livewire\EDDPos;
 use App\Livewire\Items\CreateInventory;
 use App\Livewire\Items\CreateItems;
 use App\Livewire\Items\EditInventory;
@@ -78,6 +79,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/manage-payment-methods',ListPaymentMethods::class)->name('payment.method.index');
     Route::get('/edit-payment-method/{record}',EditPaymentMethods::class)->name('payment-method.update');
     Route::get('/create-payment-method',CreatePaymentMethods::class)->name('payment-method.create');
+
+        Route::get('/EDD-POS-INventory',EDDPos::class)->name('EDDPos');
 
 }); 
 

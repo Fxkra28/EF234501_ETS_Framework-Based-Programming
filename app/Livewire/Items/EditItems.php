@@ -11,6 +11,7 @@ use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
+use Filament\Forms\Components\FileUpload;
 use Filament\Notifications\Notification;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -56,6 +57,17 @@ class EditItems extends Component implements HasActions, HasSchemas
                                 'inactive' => 'Inactive',
                             ])
                             ->grouped(),
+
+                        FileUpload::make('images')
+                            ->label('Item Images')
+                            ->image()
+                            ->multiple()
+                            ->directory('items') // stored in storage/app/public/items
+                            ->reorderable()
+                            ->openable()
+                            ->downloadable()
+                            ->visibility('public')
+                            ->maxFiles(1),
                     ]),
             ])
             ->statePath('data')

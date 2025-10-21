@@ -24,6 +24,9 @@
                 <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                     wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
             </flux:navlist.group>
+                         <flux:navlist.item icon="shopping-bag" :href="route('EDDPos')"
+                    :current="request()->routeIs('EDDPos')" wire:navigate>{{ __('EDDPos') }}
+            </flux:navlist.item>
             <flux:navlist.group :heading="__('Management')" class="grid">
                 <flux:navlist.item icon="users" :href="route('customers.index')"
                     :current="request()->routeIs('customers.index')" wire:navigate>{{ __('Manage Customers') }}

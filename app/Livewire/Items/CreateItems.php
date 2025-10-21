@@ -11,12 +11,11 @@ use Illuminate\Contracts\View\View;
 use App\Models\Item;
 use Livewire\Component;
 
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Section;
-use Filament\Forms\Components\ToggleButtons;
-
 
 class CreateItems extends Component implements HasActions, HasSchemas
 {
@@ -34,30 +33,42 @@ class CreateItems extends Component implements HasActions, HasSchemas
     {
         return $schema
             ->components([
-                                Section::make('Add the Item')
-                    ->description('fill the form to add new item')
+                Section::make('Add the Item')
+                    ->description('Fill the form to add a new item.')
                     ->columns(2)
                     ->schema([
                         TextInput::make('name')
                             ->label('Item Name')
                             ->required(),
+
                         TextInput::make('sku')
                             ->required()
                             ->unique(),
+
                         TextInput::make('price')
                             ->prefix('IDR')
                             ->required()
                             ->numeric(),
+
                         ToggleButtons::make('status')
-                            ->label('Is this Item Active?')
+                            ->label('Is this item active?')
                             ->options([
                                 'active' => 'Active',
-                                'inactive' => 'In Active',
+                                'inactive' => 'Inactive',
                             ])
                             ->default('active')
-                            ->grouped()
-                    ])
+                            ->grouped(),
 
+                        FileUpload::make('images')
+                            ->label('Item Image')
+                            ->image()
+                            ->directory('items')
+                            ->openable()
+                            ->downloadable()
+                            ->visibility('public')
+                            ->maxFiles(1)
+                            ->hint('Upload one image for this product.'),
+                    ]),
             ])
             ->statePath('data')
             ->model(Item::class);
@@ -68,14 +79,16 @@ class CreateItems extends Component implements HasActions, HasSchemas
         $data = $this->form->getState();
 
         $record = Item::create($data);
-
         $this->form->model($record)->saveRelationships();
 
-            Notification::make()
+        Notification::make()
             ->title('Item Created!')
             ->success()
-            ->body("Item created successfully!")
+            ->body("Item '{$record->name}' has been created successfully!")
             ->send();
+
+        // Reset form after creation
+        $this->form->fill();
     }
 
     public function render(): View
