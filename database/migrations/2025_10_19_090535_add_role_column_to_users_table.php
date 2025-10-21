@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('role')->default('cashier'); //admin,  fungsionaris Business Enterprise
+            $table->string('role')->default('Staff BE'); //fungsionaris Business Enterprise
         });
     }
 

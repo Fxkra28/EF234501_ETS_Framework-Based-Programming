@@ -44,9 +44,11 @@ class CreateUsers extends Component implements HasActions, HasSchemas
                         Select::make('role')
                             ->required()
                             ->options([
-                                'cashier' => 'Cashier',
-                                'admin' => 'admin',
-                                'other' => 'Other',
+                                'Kadep EDD'=> 'Kadep EDD',
+                                'Sekdep EDD' => 'Sekdep EDD',
+                                'Kabiro BE'=> 'Kabiro BE',
+                                'Wakabiro BE' => 'Wakabiro BE',
+                                'Staff BE' => 'Staff BE',
                             ])
                             ->native(false),
                         TextInput::make('password')

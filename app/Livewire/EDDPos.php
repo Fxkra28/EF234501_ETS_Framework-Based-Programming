@@ -225,29 +225,6 @@ class EDDPos extends Component
         $this->payment_method_id = null;
         $this->paid_amount = 0;
 
-        Notification::make()
-                ->title('Sale Completed')
-                ->body('Do you want to print the receipt?')
-                ->success()
-                ->duration(10000)
-                ->actions([
-                    Action::make('print')
-                        ->button()
-                        ->label('Yes, Print Receipt')
-                        ->url(route('sales.receipt', ['sale' => $sale->id]), shouldOpenInNewTab: true)
-                        ->color('primary')
-                        // ->url(route('sales.receipt', $sale))
-                        ->openUrlInNewTab(false)
-                        ->extraAttributes([
-                            'onclick' => 'event.preventDefault(); printReceipt(this.href);'
-                        ]),
-                    // NotificationAction::make('cancel')
-                    //     ->button()
-                    //     ->label('No')
-                    //     ->color('secondary'),
-                ])
-                ->send();
-
 
         } catch (\Exception $th) {
             DB::rollBack();

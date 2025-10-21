@@ -158,20 +158,5 @@
         </div>
     </div>
      <script>
-
-        function printReceipt(url) {
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = url;
-
-        iframe.onload = function () {
-            setTimeout(() => {
-                iframe.contentWindow.focus();
-                iframe.contentWindow.print();
-            }, 500); // Small delay to ensure content is fully rendered
-        };
-
-        document.body.appendChild(iframe);
-    }
     </script>
 </div>

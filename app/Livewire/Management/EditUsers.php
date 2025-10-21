@@ -44,9 +44,11 @@ class EditUsers extends Component implements HasActions, HasSchemas
                             ->unique(ignoreRecord: true),
                         Select::make('role')
                             ->options([
-                                'cashier' => 'Cashier',
-                                'admin' => 'admin',
-                                'other' => 'Other',
+                                'Kadep EDD'=> 'Kadep EDD',
+                                'Sekdep EDD' => 'Sekdep EDD',
+                                'Kabiro BE'=> 'Kabiro BE',
+                                'Wakabiro BE' => 'Wakabiro BE',
+                                'Staff BE' => 'Staff BE',
                             ])
                             ->native(false),
                         TextInput::make('password')
@@ -67,7 +69,7 @@ class EditUsers extends Component implements HasActions, HasSchemas
         Notification::make()
         ->title('User Updated!')
         ->success()
-        ->body("Payment method {$this->record->name} has been updated successfully!")
+        ->body("{$this->record->name} has been updated successfully!")
         ->send();
 
     }
